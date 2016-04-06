@@ -1,14 +1,82 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ThirdScreenFragment">
+    android:orientation="vertical"
+    tools:context=".InspectionFragment">
 
-    <com.google.android.gms.plus.PlusOneButton xmlns:plus="http://schemas.android.com/apk/lib/com.google.android.gms.plus"
-        android:id="@+id/plus_one_button"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/title_text_view"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        plus:annotation="inline"
-        plus:size="standard" />
+        android:layout_margin="10dip"
+        android:text="3 - Walkway Steps No Rust"
+        android:textSize="26sp"
+        android:textColor="#000000"
+        android:gravity="center_horizontal" />
 
-</FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/inspection_details_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dip"
+            android:text="Details"
+            android:layout_gravity="center_vertical" />
+
+        <Button
+            android:id="@+id/inspection_photos_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dip"
+            android:padding="10dip"
+            android:text="Photos"
+            android:layout_gravity="center_vertical" />
+
+    </LinearLayout>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="150dip"
+        android:layout_margin="10dip"
+        android:gravity="left|top"
+        android:hint="Comments" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/inspection_pass_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dip"
+            android:paddingLeft="40dip"
+            android:paddingRight="40dip"
+            android:text="PASS"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:background="#2d6b25"
+            android:layout_gravity="center_vertical" />
+
+        <Button
+            android:id="@+id/inspection_fail_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dip"
+            android:paddingLeft="40dip"
+            android:paddingRight="40dip"
+            android:text="FAIL"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:background="#c70616"
+            android:layout_gravity="center_vertical" />
+
+    </LinearLayout>
+
+</LinearLayout>
