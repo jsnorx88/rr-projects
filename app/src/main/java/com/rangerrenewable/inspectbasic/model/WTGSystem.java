@@ -28,7 +28,17 @@ public class WTGSystem {
         this.name = name;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public void setInspections(List<Inspection> inspections) {
         this.inspections = inspections;
     }
+
+    public List<Inspection> getInspections() { return this.inspections; };
 }

@@ -15,57 +15,58 @@
         android:textColor="#000000"
         android:gravity="center_horizontal" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center">
-
-        <Button
-            android:id="@+id/inspection_details_button"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="20dip"
-            android:text="Details"
-            android:layout_gravity="center_vertical" />
+            android:gravity="center">
 
-        <Button
-            android:id="@+id/inspection_photos_button"
-            android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/inspection_details_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dip"
+                android:text="Details"
+                android:layout_gravity="center_vertical" />
+
+            <Button
+                android:id="@+id/inspection_photos_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dip"
+                android:padding="10dip"
+                android:text="Photos"
+                android:layout_gravity="center_vertical" />
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/inspection_comments_field"
+            android:layout_width="match_parent"
+            android:layout_height="150dip"
+            android:layout_margin="10dip"
+            android:gravity="left|top"
+            android:hint="Comments" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dip"
-            android:padding="10dip"
-            android:text="Photos"
-            android:layout_gravity="center_vertical" />
+            android:gravity="center">
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/inspection_pass_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dip"
+                android:paddingLeft="40dip"
+                android:paddingRight="40dip"
+                android:text="PASS"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:background="#2d6b25"
+                android:layout_gravity="center_vertical" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="150dip"
-        android:layout_margin="10dip"
-        android:gravity="left|top"
-        android:hint="Comments" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center">
-
-        <Button
-            android:id="@+id/inspection_pass_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dip"
-            android:paddingLeft="40dip"
-            android:paddingRight="40dip"
-            android:text="PASS"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            android:background="#2d6b25"
-            android:layout_gravity="center_vertical" />
-
-        <Button
-            android:id="@+id/inspection_fail_button"
+            <Button
+                android:id="@+id/inspection_fail_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dip"

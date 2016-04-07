@@ -6,6 +6,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.rangerrenewable.inspectbasic.R;
 import com.rangerrenewable.inspectbasic.model.Inspection;
@@ -19,6 +22,13 @@ public class InspectionFragment extends Fragment {
 
     // current inspection being viewed
     private Inspection inspection;
+
+    TextView titleTextView;
+    Button detailsButton;
+    Button photosButton;
+    EditText commentsField;
+    Button passButton;
+    Button failButton;
 
     public InspectionFragment() {
         // Required empty public constructor
@@ -47,7 +57,12 @@ public class InspectionFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_inspection, container, false);
 
-
+        this.titleTextView = (TextView) view.findViewById(R.id.title_text_view);
+        this.detailsButton = (Button) view.findViewById(R.id.inspection_details_button);
+        this.photosButton = (Button) view.findViewById(R.id.inspection_photos_button);
+        this.commentsField = (EditText) view.findViewById(R.id.inspection_comments_field);
+        this.passButton = (Button) view.findViewById(R.id.inspection_pass_button);
+        this.failButton = (Button) view.findViewById(R.id.inspection_fail_button);
 
         return view;
     }

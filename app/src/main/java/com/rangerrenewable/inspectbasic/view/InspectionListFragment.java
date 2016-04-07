@@ -3,12 +3,16 @@ package com.rangerrenewable.inspectbasic.view;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 import com.rangerrenewable.inspectbasic.R;
 import com.rangerrenewable.inspectbasic.model.Inspection;
+import com.rangerrenewable.inspectbasic.model.WTGSystem;
 
 /**
  *
@@ -16,6 +20,8 @@ import com.rangerrenewable.inspectbasic.model.Inspection;
 public class InspectionListFragment extends Fragment {
 
     private OnInspectionListFragmentListener mListener;
+
+    private WTGSystem system;
 
     public InspectionListFragment() {
         // Required empty public constructor
@@ -27,10 +33,9 @@ public class InspectionListFragment extends Fragment {
      *
      * @return A new instance of fragment InspectionListFragment.
      */
-    public static InspectionListFragment newInstance() {
+    public static InspectionListFragment newInstance(WTGSystem system) {
         InspectionListFragment fragment = new InspectionListFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
+        fragment.system = system;
         return fragment;
     }
 
@@ -78,5 +83,42 @@ public class InspectionListFragment extends Fragment {
      */
     public interface OnInspectionListFragmentListener {
         void onInspectionTapped(Inspection inspection);
+    }
+
+    // List adapter
+
+    public class InspectionListAdapter extends BaseAdapter {
+        private LayoutInflater inflater;
+
+        public InspectionListAdapter() {
+            inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        }
+
+        public long getItemId(int position) {
+            return position;
+        }
+
+        public int getCount() {
+            return system.getInspections().size();
+        }
+
+        public Object getItem(int position) {
+            return system.getInspections().get(position);
+        }
+
+        public View getView(int position, View convertView, ViewGroup parent) {
+            Inspection inspection = (Inspection) getItem(position);
+
+            // we only want to inflate the first few times the views are loaded... otherwise reuse them
+            if (convertView == null) {
+                convertView = inflater.inflate(R.layout.fragment_inspection_list_item, null);
+            }
+
+            // set the information to the view
+            ((TextView)convertView.findViewById(R.id.inspection_list_item_primary_text)).setText((position + 1 + "."));
+            ((TextView)convertView.findViewById(R.id.inspection_list_item_secondary_text)).setText(inspection.getTitle());
+
+            return convertView;
+        }
     }
 }

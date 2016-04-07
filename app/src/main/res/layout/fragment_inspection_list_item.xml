@@ -1,0 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#b0ddf7"
+    android:layout_margin="20dip"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/inspection_list_item_primary_text"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_margin="10dip"
+        android:textColor="#000000"
+        android:textSize="28sp"
+        android:singleLine="true"
+        android:ellipsize="end" />
+
+    <TextView
+        android:id="@+id/inspection_list_item_secondary_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dip"
+        android:textColor="#000000"
+        android:textSize="18sp" />
+
+</LinearLayout>

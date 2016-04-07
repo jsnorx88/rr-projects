@@ -1,0 +1,19 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#b0ddf7"
+    android:layout_margin="20dip">
+
+    <TextView
+        android:id="@+id/system_list_item_primary_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dip"
+        android:textColor="#000000"
+        android:textSize="28sp"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:gravity="center_horizontal" />
+
+</LinearLayout>
