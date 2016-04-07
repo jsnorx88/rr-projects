@@ -33,7 +33,14 @@ public class Inspection {
                       String result,
                       Map<String, String> values,
                       String comments) {
-
+        this.defectCode = defectCode;
+        this.title = title;
+        this.description = description;
+        this.photos = photos;
+        this.response = response;
+        this.result = result;
+        this.values = values;
+        this.comments = comments;
     }
 
     public String getTitle() {

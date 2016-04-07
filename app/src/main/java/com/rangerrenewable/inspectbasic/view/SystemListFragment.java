@@ -6,13 +6,16 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.rangerrenewable.inspectbasic.R;
-import com.rangerrenewable.inspectbasic.model.Inspection;
 import com.rangerrenewable.inspectbasic.model.WTGSystem;
+import com.rangerrenewable.inspectbasic.model.WTGSystemParser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,9 +26,25 @@ public class SystemListFragment extends Fragment {
     private OnSystemListFragmentListener mListener;
 
     private List<WTGSystem> systems;
+    private ListView listView;
 
+
+    // Stub in the different systems that would otherwise be pulled from spreadsheet
     public SystemListFragment() {
         // Required empty public constructor
+        systems = new ArrayList<WTGSystem>();
+        WTGSystem s = new WTGSystem("Blade");
+        systems.add(s);
+        s = new WTGSystem("Rotor");
+        systems.add(s);
+        s = WTGSystemParser.importNacelleSystem();
+        systems.add(s);
+        s = new WTGSystem("Gearbox");
+        systems.add(s);
+        s = new WTGSystem("Transformer");
+        systems.add(s);
+        s = new WTGSystem("Tower");
+        systems.add(s);
     }
 
     /**
@@ -49,6 +68,11 @@ public class SystemListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_system_list, container, false);
+
+        this.listView = (ListView) view.findViewById(R.id.fragment_system_list_view);
+        SystemListAdapter adapter = new SystemListAdapter();
+        this.listView.setAdapter(adapter);
+        this.listView.setOnItemClickListener(listener);
 
         return view;
     }
@@ -83,6 +107,17 @@ public class SystemListFragment extends Fragment {
     }
 
     // List adapter
+
+    AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener() {
+
+        @Override
+        public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+            // call the delegate with the item clicked
+            if (mListener != null) {
+                mListener.onSystemSelected(systems.get(position));
+            }
+        }
+    };
 
     public class SystemListAdapter extends BaseAdapter {
         private LayoutInflater inflater;

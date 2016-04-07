@@ -7,12 +7,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.rangerrenewable.inspectbasic.R;
 import com.rangerrenewable.inspectbasic.model.Inspection;
 import com.rangerrenewable.inspectbasic.model.WTGSystem;
+
+import java.util.ArrayList;
 
 /**
  *
@@ -22,6 +26,8 @@ public class InspectionListFragment extends Fragment {
     private OnInspectionListFragmentListener mListener;
 
     private WTGSystem system;
+
+    private ListView listView;
 
     public InspectionListFragment() {
         // Required empty public constructor
@@ -42,6 +48,9 @@ public class InspectionListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (system.getInspections() == null) {
+            system.setInspections(new ArrayList<Inspection>());
+        }
     }
 
     @Override
@@ -51,6 +60,10 @@ public class InspectionListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_inspection_list, container, false);
 
         // hook into the views here
+        this.listView = (ListView) view.findViewById(R.id.fragment_inspection_list_view);
+        InspectionListAdapter adapter = new InspectionListAdapter();
+        this.listView.setAdapter(adapter);
+        this.listView.setOnItemClickListener(listener);
 
         return view;
     }
@@ -86,6 +99,17 @@ public class InspectionListFragment extends Fragment {
     }
 
     // List adapter
+
+    AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener() {
+
+        @Override
+        public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+            // call the delegate with the item clicked
+            if (mListener != null) {
+                mListener.onInspectionTapped(system.getInspections().get(position));
+            }
+        }
+    };
 
     public class InspectionListAdapter extends BaseAdapter {
         private LayoutInflater inflater;

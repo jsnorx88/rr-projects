@@ -5,8 +5,10 @@
     tools:context=".SystemListFragment">
 
     <ListView
-        android:id="@+id/fragment_system_list"
+        android:id="@+id/fragment_system_list_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:divider="#000000"
+        android:dividerHeight="2dip"/>
 
 </LinearLayout>

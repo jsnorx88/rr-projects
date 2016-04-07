@@ -3,6 +3,8 @@ package com.rangerrenewable.inspectbasic.controller;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -12,11 +14,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.rangerrenewable.inspectbasic.R;
+import com.rangerrenewable.inspectbasic.model.Inspection;
 import com.rangerrenewable.inspectbasic.model.WTGSystem;
+import com.rangerrenewable.inspectbasic.view.InspectionFragment;
+import com.rangerrenewable.inspectbasic.view.InspectionListFragment;
 import com.rangerrenewable.inspectbasic.view.SystemListFragment;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, SystemListFragment.OnSystemListFragmentListener {
+        implements NavigationView.OnNavigationItemSelectedListener, SystemListFragment.OnSystemListFragmentListener,
+        InspectionListFragment.OnInspectionListFragmentListener, InspectionFragment.OnInspectionFragmentListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +83,18 @@ public class MainActivity extends AppCompatActivity
             // do the import
 
         } else if (id == R.id.nav_select_system) {
+            this.setTitle("Gamesa Android App");
+
+            // clear the back stack if this is selected
+            getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
             // show system list for currently loaded checklist
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager()
+                    .beginTransaction();
+            fragmentTransaction
+                    .replace(R.id.container, SystemListFragment.newInstance());
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
         } else if (id == R.id.nav_export) {
             // show export screen
         }
@@ -91,6 +108,35 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onSystemSelected(WTGSystem system) {
+        this.setTitle(system.getName() + " Inspections");
 
+        // show inspection list for currently loaded system
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager()
+                .beginTransaction();
+        fragmentTransaction
+                .replace(R.id.container, InspectionListFragment.newInstance(system));
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
+    // Inspection List Fragment Callback
+
+    @Override
+    public void onInspectionTapped(Inspection inspection) {
+        // show inspection details
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager()
+                .beginTransaction();
+        fragmentTransaction
+                .replace(R.id.container, InspectionFragment.newInstance(inspection));
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
+    // Inspection Details Fragment Callback
+
+    @Override
+    public void onNextTapped() {
+        // TODO load up the next inspection from the inspection list of the currently selected system
+        getSupportFragmentManager().popBackStack();
     }
 }

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.rangerrenewable.inspectbasic.R;
 import com.rangerrenewable.inspectbasic.model.Inspection;
@@ -63,6 +64,37 @@ public class InspectionFragment extends Fragment {
         this.commentsField = (EditText) view.findViewById(R.id.inspection_comments_field);
         this.passButton = (Button) view.findViewById(R.id.inspection_pass_button);
         this.failButton = (Button) view.findViewById(R.id.inspection_fail_button);
+
+        this.titleTextView.setText(this.inspection.getTitle());
+
+        this.detailsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), inspection.getDescription(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+        this.passButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // this passed.. set the response and move on..
+                inspection.setResponse(true);
+                if (mListener != null) {
+                    mListener.onNextTapped();
+                }
+            }
+        });
+
+        this.failButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // this failed.. set the response and move on..
+                inspection.setResponse(false);
+                if (mListener != null) {
+                    mListener.onNextTapped();
+                }
+            }
+        });
 
         return view;
     }
