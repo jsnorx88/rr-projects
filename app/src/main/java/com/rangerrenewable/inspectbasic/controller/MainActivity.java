@@ -1,5 +1,6 @@
 package com.rangerrenewable.inspectbasic.controller;
 
+import android.app.ProgressDialog;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -119,12 +120,34 @@ public class MainActivity extends AppCompatActivity
             }
         } else if (id == R.id.nav_export) {
             // show export screen
+            final ProgressDialog progress = ProgressDialog.show(this, "Export File",
+                    "Exporting Inspections...", true);
 
-            // in menu highlight item 3 was selected
-            MenuItem menuItem = navigationView.getMenu().getItem(2);
-            if (menuItem != null) {
-                menuItem.setChecked(true);
-            }
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    // do the thing that takes a long time
+                    try {
+                        Thread.sleep(4000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            progress.dismiss();
+                            Toast.makeText(MainActivity.this, "File has been exported!", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+            }).start();
+
+//            // in menu highlight item 3 was selected
+//            MenuItem menuItem = navigationView.getMenu().getItem(2);
+//            if (menuItem != null) {
+//                menuItem.setChecked(true);
+//            }
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -139,7 +162,6 @@ public class MainActivity extends AppCompatActivity
                 .beginTransaction();
         fragmentTransaction
                 .replace(R.id.container, ImportChecklistFragment.newInstance());
-        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 
@@ -150,7 +172,6 @@ public class MainActivity extends AppCompatActivity
                 .beginTransaction();
         fragmentTransaction
                 .replace(R.id.container, SystemListFragment.newInstance());
-        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 
