@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -141,6 +142,9 @@ public class InspectionListFragment extends Fragment {
             // set the information to the view
             ((TextView)convertView.findViewById(R.id.inspection_list_item_primary_text)).setText((position + 1 + "."));
             ((TextView)convertView.findViewById(R.id.inspection_list_item_secondary_text)).setText(inspection.getTitle());
+            if (inspection.hasResponded()) {
+                ((ImageView) convertView.findViewById(R.id.inspection_list_item_image_view)).setImageResource(inspection.getResponse() ? R.drawable.image_passed : R.drawable.image_failed);
+            }
 
             return convertView;
         }
