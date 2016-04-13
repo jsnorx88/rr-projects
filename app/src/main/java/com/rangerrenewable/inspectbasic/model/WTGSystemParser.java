@@ -35,7 +35,7 @@ public class WTGSystemParser {
                 false,
                 "No Result",
                 null,
-                "No Comments");
+                null);
 
         inspections.add(inspection);
 
@@ -46,7 +46,7 @@ public class WTGSystemParser {
                 false,
                 "No Result",
                 null,
-                "No Comments");
+                null);
 
         inspections.add(inspection);
 
@@ -57,7 +57,7 @@ public class WTGSystemParser {
                 false,
                 "No Result",
                 null,
-                "No Comments");
+                null);
 
         inspections.add(inspection);
 
@@ -68,7 +68,7 @@ public class WTGSystemParser {
                 false,
                 "No Result",
                 null,
-                "No Comments");
+                null);
 
         inspections.add(inspection);
 
@@ -79,7 +79,7 @@ public class WTGSystemParser {
                 false,
                 "No Result",
                 null,
-                "No Comments");
+                null);
 
         inspections.add(inspection);
 
@@ -90,7 +90,7 @@ public class WTGSystemParser {
                 false,
                 "No Result",
                 null,
-                "No Comments");
+                null);
 
         inspections.add(inspection);
 
@@ -101,7 +101,7 @@ public class WTGSystemParser {
                 false,
                 "No Result",
                 null,
-                "No Comments");
+                null);
 
         inspections.add(inspection);
 
@@ -112,7 +112,7 @@ public class WTGSystemParser {
                 false,
                 "No Result",
                 null,
-                "No Comments");
+                null);
 
         inspections.add(inspection);
 
@@ -123,7 +123,7 @@ public class WTGSystemParser {
                 false,
                 "No Result",
                 null,
-                "No Comments");
+                null);
 
         inspections.add(inspection);
         return inspections;

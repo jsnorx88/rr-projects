@@ -1,0 +1,63 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.rangerrenewable.inspectbasic.view.ImportChecklistFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dip"
+        android:text="Inspection Checklist"
+        android:textColor="#000000"
+        android:textSize="26sp"
+        android:gravity="center_horizontal"/>
+
+    <EditText
+        android:id="@+id/import_checklist_wind_farm_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dip"
+        android:textSize="20sp"
+        android:hint="Wind Farm"
+        android:inputType="textCapWords" />
+
+    <EditText
+        android:id="@+id/import_checklist_wtg_number_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dip"
+        android:textSize="20sp"
+        android:hint="WTG #"
+        android:inputType="numberDecimal"/>
+
+    <EditText
+        android:id="@+id/import_checklist_inspector_name_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dip"
+        android:textSize="20sp"
+        android:hint="Inspector Name"
+        android:inputType="textCapWords"/>
+
+    <EditText
+        android:id="@+id/import_checklist_inspection_date_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dip"
+        android:textSize="20sp"
+        android:hint="Inspection Date"
+        android:inputType="datetime"/>
+
+    <Button
+        android:id="@+id/import_checklist_load_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dip"
+        android:text="Load Checklist"
+        android:textSize="20sp"
+        android:textColor="#FFFFFF"
+        android:background="#60dea5"/>
+
+</LinearLayout>

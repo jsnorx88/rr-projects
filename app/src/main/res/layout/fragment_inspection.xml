@@ -44,7 +44,10 @@
             android:layout_height="150dip"
             android:layout_margin="10dip"
             android:gravity="left|top"
-            android:hint="Comments" />
+            android:hint="Comments"
+            android:inputType="textCapSentences"
+            android:imeOptions="actionDone"
+            android:singleLine="true"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -66,17 +69,44 @@
 
             <Button
                 android:id="@+id/inspection_fail_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dip"
-            android:paddingLeft="40dip"
-            android:paddingRight="40dip"
-            android:text="FAIL"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            android:background="#c70616"
-            android:layout_gravity="center_vertical" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dip"
+                android:paddingLeft="40dip"
+                android:paddingRight="40dip"
+                android:text="FAIL"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:background="#c70616"
+                android:layout_gravity="center_vertical" />
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/inspection_fragment_image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#151515"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/inspection_next_item_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="10dip"
+            android:paddingLeft="30dip"
+            android:paddingRight="30dip"
+            android:text="Next Page"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            android:background="#29a1c6"
+            android:layout_gravity="bottom|right" />
+
+    </RelativeLayout>
 
 </LinearLayout>

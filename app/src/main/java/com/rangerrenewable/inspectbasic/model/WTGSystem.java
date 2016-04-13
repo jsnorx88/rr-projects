@@ -41,4 +41,20 @@ public class WTGSystem {
     }
 
     public List<Inspection> getInspections() { return this.inspections; };
+
+    public int getIndexForInspection(Inspection inspection) {
+        // hacky .. tweak.. this..
+        for (int i = 0; i < this.inspections.size() - 1; i++) {
+            Inspection thisInspection = this.inspections.get(i);
+            if (inspection.getDefectCode().equals(thisInspection.getDefectCode())) {
+                return i;
+            }
+        }
+        // indicate it is done
+        return -1;
+    }
+
+    public Inspection getInspection(int nextInspectionIndex) {
+        return inspections.get(nextInspectionIndex);
+    }
 }

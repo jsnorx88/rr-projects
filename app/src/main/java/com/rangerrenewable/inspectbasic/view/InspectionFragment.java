@@ -1,21 +1,34 @@
 package com.rangerrenewable.inspectbasic.view;
 
+import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.rangerrenewable.inspectbasic.R;
 import com.rangerrenewable.inspectbasic.model.Inspection;
 
+import java.io.File;
+
 /**
- *  Handles the view for a current inspection item
+ * Handles the view for a current inspection item
  */
 public class InspectionFragment extends Fragment {
 
@@ -24,12 +37,17 @@ public class InspectionFragment extends Fragment {
     // current inspection being viewed
     private Inspection inspection;
 
-    TextView titleTextView;
-    Button detailsButton;
-    Button photosButton;
-    EditText commentsField;
-    Button passButton;
-    Button failButton;
+    private Uri imageUri;
+
+    private ImageView imageView;
+
+    private TextView titleTextView;
+    private Button detailsButton;
+    private Button photosButton;
+    private EditText commentsField;
+    private Button passButton;
+    private Button failButton;
+    private Button nextButton;
 
     public InspectionFragment() {
         // Required empty public constructor
@@ -64,6 +82,9 @@ public class InspectionFragment extends Fragment {
         this.commentsField = (EditText) view.findViewById(R.id.inspection_comments_field);
         this.passButton = (Button) view.findViewById(R.id.inspection_pass_button);
         this.failButton = (Button) view.findViewById(R.id.inspection_fail_button);
+        this.nextButton = (Button) view.findViewById(R.id.inspection_next_item_button);
+
+        this.imageView = (ImageView) view.findViewById(R.id.inspection_fragment_image_view);
 
         this.titleTextView.setText(this.inspection.getTitle());
 
@@ -74,14 +95,24 @@ public class InspectionFragment extends Fragment {
             }
         });
 
+        this.photosButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                File photo = new File(Environment.getExternalStorageDirectory(), "Pic.jpg");
+                intent.putExtra(MediaStore.EXTRA_OUTPUT,
+                        Uri.fromFile(photo));
+                imageUri = Uri.fromFile(photo);
+                startActivityForResult(intent, 0);
+            }
+        });
+
         this.passButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // this passed.. set the response and move on..
                 inspection.setResponse(true);
-                if (mListener != null) {
-                    mListener.onNextTapped();
-                }
+                onSelection(true);
             }
         });
 
@@ -90,13 +121,54 @@ public class InspectionFragment extends Fragment {
             public void onClick(View v) {
                 // this failed.. set the response and move on..
                 inspection.setResponse(false);
+                onSelection(false);
+            }
+        });
+
+        this.nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 if (mListener != null) {
-                    mListener.onNextTapped();
+                    mListener.onNextTapped(inspection);
                 }
             }
         });
 
+        if (this.inspection.hasResponded()) {
+            // set the currently selected selection
+            this.onSelection(this.inspection.getResponse());
+        }
+
+        // set the comments
+        if (this.inspection.getComments() != null) {
+            this.commentsField.setText(this.inspection.getComments());
+        }
+
+        // TODO set the photo..
+
         return view;
+    }
+
+    // update the pass/fail buttons to be highlighted
+    private void onSelection(boolean isPassed) {
+        // change the size of selected item
+        // HACKY.. change this out
+        if (isPassed) {
+            this.passButton.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            this.failButton.setLayoutParams(new LinearLayout.LayoutParams(400, 100));
+        } else {
+            this.passButton.setLayoutParams(new LinearLayout.LayoutParams(400, 100));
+            this.failButton.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        }
+
+        // set that the inspector has responded
+        this.inspection.setHasResponded(true);
+
+        // set the comments the inspector may have input
+        String comments = this.commentsField.getText().toString();
+        if (comments != null && !comments.equals("")) {
+            this.inspection.setComments(comments);
+        }
     }
 
     @Override
@@ -121,10 +193,33 @@ public class InspectionFragment extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == Activity.RESULT_OK) {
+            Uri selectedImage = imageUri;
+            getActivity().getContentResolver().notifyChange(selectedImage, null);
+            ContentResolver cr = getActivity().getContentResolver();
+            Bitmap bitmap;
+            try {
+                bitmap = android.provider.MediaStore.Images.Media
+                        .getBitmap(cr, selectedImage);
+
+                imageView.setImageBitmap(bitmap);
+                Toast.makeText(getActivity(), selectedImage.toString(), Toast.LENGTH_LONG).show();
+            } catch (Exception e) {
+                Toast.makeText(getActivity(), "Failed to load", Toast.LENGTH_SHORT)
+                        .show();
+                Log.e("Camera", e.toString());
+            }
+        }
+    }
+
     /**
      *
      */
     public interface OnInspectionFragmentListener {
-        void onNextTapped();
+        void onNextTapped(Inspection currentInspection);
     }
 }

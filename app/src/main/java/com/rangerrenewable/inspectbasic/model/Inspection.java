@@ -19,6 +19,8 @@ public class Inspection {
     // boolean pass/fail
     private boolean response;
 
+    private boolean hasResponded;
+
     private String result;
 
     private Map<String, String> values;
@@ -41,6 +43,14 @@ public class Inspection {
         this.result = result;
         this.values = values;
         this.comments = comments;
+    }
+
+    public String getDefectCode() {
+        return defectCode;
+    }
+
+    public void setDefectCode(String defectCode) {
+        this.defectCode = defectCode;
     }
 
     public String getTitle() {
@@ -74,6 +84,15 @@ public class Inspection {
     // accessor for setting an inspection as passed or failed
     public void setResponse(boolean response) {
         this.response = response;
+    }
+
+    public boolean hasResponded() {
+        return hasResponded;
+    }
+
+    // accessor for seeing if the user has responded
+    public void setHasResponded(boolean hasResponded) {
+        this.hasResponded = hasResponded;
     }
 
     public String getComments() {
