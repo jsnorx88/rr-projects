@@ -151,14 +151,13 @@ public class InspectionFragment extends Fragment {
 
     // update the pass/fail buttons to be highlighted
     private void onSelection(boolean isPassed) {
-        // change the size of selected item
-        // HACKY.. change this out
+        // highlight the selected buttton
         if (isPassed) {
-            this.passButton.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-            this.failButton.setLayoutParams(new LinearLayout.LayoutParams(400, 100));
+            this.passButton.setBackgroundResource(R.drawable.button_passed_selected);
+            this.failButton.setBackgroundResource(R.drawable.button_failed_not_selected);
         } else {
-            this.passButton.setLayoutParams(new LinearLayout.LayoutParams(400, 100));
-            this.failButton.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            this.passButton.setBackgroundResource(R.drawable.button_passed_not_selected);
+            this.failButton.setBackgroundResource(R.drawable.button_failed_selected);
         }
 
         // set that the inspector has responded

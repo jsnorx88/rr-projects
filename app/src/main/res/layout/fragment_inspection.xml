@@ -52,32 +52,30 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center">
+            android:gravity="center" >
 
             <Button
                 android:id="@+id/inspection_pass_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dip"
-                android:paddingLeft="40dip"
-                android:paddingRight="40dip"
+                android:layout_weight="1"
+                android:layout_margin="10dip"
                 android:text="PASS"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
-                android:background="#2d6b25"
+                android:background="@drawable/button_passed_not_selected"
                 android:layout_gravity="center_vertical" />
 
             <Button
                 android:id="@+id/inspection_fail_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dip"
-                android:paddingLeft="40dip"
-                android:paddingRight="40dip"
+                android:layout_weight="1"
+                android:layout_margin="10dip"
                 android:text="FAIL"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
-                android:background="#c70616"
+                android:background="@drawable/button_failed_not_selected"
                 android:layout_gravity="center_vertical" />
 
     </LinearLayout>
